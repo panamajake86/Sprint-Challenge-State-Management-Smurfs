@@ -1,16 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getTheSmurfs, addTheSmurf } from '../actions';
+import { getTheSmurfs } from '../actions';
 import axios from 'axios';
 
 const SmurfData = props => {
 
-    const [smurf, setSmurf] = React.useState('');
+    const [name, setName] = React.useState('');
+    const [age, setAge] = React.useState('');
+    const [height, setHeight] = React.useState('');
 
     const smurfy = {
-        name: smurf,
-        age: smurf,
-        height: smurf
+        name: name,
+        age: age,
+        height: height
     }
 
     return (
@@ -29,14 +31,20 @@ const SmurfData = props => {
                 )
             })}
             <input
-                onChange={e => setSmurf(e.target.value)}
-                value={smurf.name} />
+                onChange={e => setName(e.target.value)}
+                value={name}
+                placeholder="Name"
+                 />
             <input
-                onChange={e => setSmurf(e.target.value)}
-                value={smurf.age} />
+                onChange={e => setAge(e.target.value)}
+                value={age}
+                placeholder="Age"
+                 />
             <input
-                onChange={e => setSmurf(e.target.value)}
-                value={smurf.height} />
+                onChange={e => setHeight(e.target.value)}
+                value={height}
+                placeholder="Height"
+                 />
             <button onClick={e => {
                 e.preventDefault();
                 axios
@@ -45,6 +53,9 @@ const SmurfData = props => {
                         console.log('in post', res)
                     })
                     .catch(err => console.log(err));
+                    setName('');
+                    setAge('');
+                    setHeight('');
             }}>Add Smurf</button>
         </>
     )
@@ -57,4 +68,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { getTheSmurfs, addTheSmurf })(SmurfData);
+export default connect(mapStateToProps, { getTheSmurfs })(SmurfData);
