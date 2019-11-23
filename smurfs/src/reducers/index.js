@@ -1,4 +1,4 @@
-import { GRAB_SMURF } from "../actions";
+import { GRAB_SMURF, SMURF_ERROR, ADD_SMURF } from "../actions";
 
 
 const initialState = {
@@ -16,10 +16,19 @@ const reducer = (state = initialState, action) => {
         return {
             ...state,
             smurfs: action.payload
-        }
+        };
+        case SMURF_ERROR:
+        return {
+            ...state,
+            error: action.payload
+        };
+        case ADD_SMURF:
+            return {
+                ...state
+            }
         default:
             return state;
     }
 }
 
-export default reducer;
+export default reducer
