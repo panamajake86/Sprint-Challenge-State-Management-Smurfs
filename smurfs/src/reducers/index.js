@@ -1,4 +1,4 @@
-import { GRAB_SMURF, SMURF_ERROR, ADD_SMURF } from "../actions";
+import { GRAB_SMURF, SMURF_ERROR } from "../actions";
 
 
 const initialState = {
