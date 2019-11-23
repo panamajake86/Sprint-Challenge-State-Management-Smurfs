@@ -1,8 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getTheSmurfs, addTheSmurf } from '../actions';
+import axios from 'axios';
 
 const SmurfData = props => {
+
+    const [smurf, setSmurf] = React.useState('');
+
+    const smurfy = {
+        name: smurf,
+        age: smurf,
+        height: smurf
+    }
+
     return (
         <>
             <button onClick={() => {
@@ -18,10 +28,24 @@ const SmurfData = props => {
                     </div>
                 )
             })}
-            <input />
-            <input />
-            <input />
-            <button onClick={()=>{addTheSmurf()}}>Add Smurf</button>
+            <input
+                onChange={e => setSmurf(e.target.value)}
+                value={smurf.name} />
+            <input
+                onChange={e => setSmurf(e.target.value)}
+                value={smurf.age} />
+            <input
+                onChange={e => setSmurf(e.target.value)}
+                value={smurf.height} />
+            <button onClick={e => {
+                e.preventDefault();
+                axios
+                    .post("http://localhost:3333/smurfs", smurfy)
+                    .then(res => {
+                        console.log('in post', res)
+                    })
+                    .catch(err => console.log(err));
+            }}>Add Smurf</button>
         </>
     )
 }
